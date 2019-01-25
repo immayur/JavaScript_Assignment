@@ -1,0 +1,164 @@
+.mainbar{
+	#align: center;
+	overflow: hidden;
+	background-color: #333;
+	margin-left: 25%;
+}
+
+.mainbar a{
+	display: inline-block;
+	float: center;
+	color: #f2f2f2;
+	text-align: center;
+	padding : 14px 20px;
+	text-decoration: none;
+	font-size: 17px;
+	height: 50px;
+	
+}
+
+.mainbar a:hover{
+	background-color: #CBE47E;
+	color: white;
+}
+
+.mainbar a.active{
+	background-color: #4caf50;
+}
+
+.schedule_css{
+	width:100%;
+	height:100%;
+	margin-top: 10px;
+	background-color:
+}
+
+# css for priority
+
+.prioritybtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.priority {
+  position: relative;
+  display: inline-block;
+}
+
+.priority-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.priority-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.priority-content a:hover {background-color: #f1f1f1}
+
+.priority:hover .priority-content {
+  display: block;
+}
+
+.priority:hover .prioritybtn {
+  background-color: #3e8e41;
+}
+
+//css for addtask and the form
+
+#form_css, #addtask_css {
+  padding: 5px;
+  text-align: center;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+
+#form_css {
+  padding: 50px;
+  display: none;
+  color: #f2f2f2;
+}
+
+
+//css code for form
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  margin-top:5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 75%;
+    margin-top: 0;
+  }
+}
+
+.form_size{
+	width:50%;
+	height:20px;
+}

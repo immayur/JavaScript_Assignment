@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>To Do</title>
+<link rel = "stylesheet" href = "css/main.css"></link>
+
+</head>
+<body style="background-color:#E9F6C0">
+<!--main division -->
+<div>
+	<div style="height=50px; width=100%;">
+	<div align ="center" style="height:50px; width: 50%;" class= "mainbar">
+		<a href="#" class= "active">Lists</a> 
+		<a href="#" >Today</a> 
+		<a id = "scheduleBtn" href="#" >Scheduled</a>
+	</div>
+	</div>
+	<div>
+	<!--division where page is loaded for add and view today's tasks-->
+	<div  id="content" style="width: 100%" class="content" >
+	<div id="schedule_div">
+	hey
+	</div>
+	</div>
+	
+</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/to_do.js"></script>
+<script>
+
+$(document).ready(function(){
+  
+  $("#scheduleBtn").click(function(){
+    $("#schedule_div").show();
+  });
+});
+
+</script>
+</body>
+
+
+</html>
