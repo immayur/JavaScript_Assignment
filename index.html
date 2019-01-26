@@ -14,28 +14,80 @@
 		<a id = "scheduleBtn" href="#" >Scheduled</a>
 	</div>
 	</div>
-	<div>
+		
+	<!--division where fetched tasks are shown-->
+
+		<div id= "fetched_data">
+		</div>
+		
 	<!--division where page is loaded for add and view today's tasks-->
 	<div  id="content" style="width: 100%" class="content" >
-	<div id="schedule_div">
-	hey
-	</div>
+	
+			
+	<div id="main_form_div" align="center">
+		<div id="addtask_css" class="form_size" align="center">Add Task.......</div>
+		<form id="form_css" class="form_size">
+			
+		 <div class="row">
+     
+      <div class="col-75">
+        <input type="text" id="title" name="title" placeholder="Add a title..">
+      </div>
+    </div>
+    <div class="row">
+      <div >Priority</div>
+      <div class="col-75">
+        <select id="priority" name="Priority">
+          <option value="high">HIGH</option>
+          <option value="medium">MEDIUM</option>
+          <option value="LOW">LOW</option>
+        </select>
+      </div>
+    </div>
+	 <div class="row">
+     
+      <div class="col-75">
+			<select id="category" name="Category">
+          <option value="Home">Home</option>
+          <option value="Office">Office</option>
+          <option value="Friend">Friend</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-75">
+        <textarea id="description" name="description" placeholder="Add a description.." style="height:100px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <input id = "saveBtn" type="Submit" value="Save">
+    </div>
+	</form>	 
+		 
 	</div>
 	
+	
+	</div>
+	
+	<!--code end for schedule division-->
+	
 </div>
-</div>
-<script src="js/jquery.min.js"></script>
+
 <script src="js/to_do.js"></script>
+<script src="js/selectdata.js"></script>
+<script  src="js/jquery.min.js"></script>
 <script>
 
 $(document).ready(function(){
-  
-  $("#scheduleBtn").click(function(){
-    $("#schedule_div").show();
+
+  $("#addtask_css").click(function(){
+    $("#form_css").slideToggle("slow");
   });
+ 
 });
 
 </script>
+
 </body>
 
 

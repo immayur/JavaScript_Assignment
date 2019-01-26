@@ -1,14 +1,5 @@
-<html>
-<head>
-<title>Add Task</title>
-<link rel = "stylesheet" href = "css/main.css"></link>
-</head>
-<body style="background-color:#E9F6C0">
-<div>
-
-	
-	<div id="main_form_div" align="center">
-		<div id="addtask_css" class="form_size" align="center">Add Task.......</div>
+`<div id="main_form_div" align="center">
+		<div id="addtask_css" class="form_size" align="center">.......</div>
 		<form id="form_css" class="form_size">
 			
 		 <div class="row">
@@ -20,10 +11,20 @@
     <div class="row">
       <div >Priority</div>
       <div class="col-75">
-        <select id="country" name="country">
+        <select id="priority" name="Priority">
           <option value="high">HIGH</option>
           <option value="medium">MEDIUM</option>
           <option value="LOW">LOW</option>
+        </select>
+      </div>
+    </div>
+	 <div class="row">
+     
+      <div class="col-75">
+			<select id="category" name="Category">
+          <option value="Home">Home</option>
+          <option value="Office">Office</option>
+          <option value="Friend">Friend</option>
         </select>
       </div>
     </div>
@@ -33,28 +34,8 @@
       </div>
     </div>
     <div class="row">
-      <input type="Submit" value="Save">
+      <input id = "saveBtn" type="Submit" value="Save">
     </div>
 	</form>	 
 		 
-	</div>
-	
-</div>
-<script src="js/to_do.js"></script>
-<script src="js/selectdata.js"></script>
-<script  src="js/jquery.min.js"></script>
-<script>
-
-$(document).ready(function(){
-
-  $("#addtask_css").click(function(){
-    $("#form_css").slideToggle("slow");
-  });
- 
-});
-
-</script>
-</body>
-
-
-</html>
+	</div>`
