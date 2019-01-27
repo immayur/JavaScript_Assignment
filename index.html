@@ -14,17 +14,18 @@
 		<a id = "scheduleBtn" href="#" >Scheduled</a>
 	</div>
 	</div>
-		
+	<div>	
 	<!--division where fetched tasks are shown-->
 
-		<div id= "fetched_data">
-		</div>
+		
 		
 	<!--division where page is loaded for add and view today's tasks-->
 	<div  id="content" style="width: 100%" class="content" >
 	
-			
-	<div id="main_form_div" align="center">
+	<div id= "fetched_data" style="display:inline">
+		</div>
+		
+	<div id="main_form_div" align="center" style="display:inline">
 		<div id="addtask_css" class="form_size" align="center">Add Task.......</div>
 		<form id="form_css" class="form_size">
 			
@@ -60,13 +61,30 @@
       </div>
     </div>
     <div class="row">
-      <input id = "saveBtn" type="Submit" value="Save">
+      <input id = "saveBtn" type="submit" value="Save">
+	  <input id = "subtaskBtn" type = "submit" value="Subtasks" onclick="open_subtask_form()">
     </div>
 	</form>	 
-		 
+	</div>	 
 	</div>
 	
 	
+	</div>
+	
+	<!-- form for adding subtasks-->
+	
+	<div class="subtask_form_popup" id="myForm">
+	  <form class="form-container">
+		
+		<label for="sub_task"><b>Subtask Title</b></label>
+		<input type="text" placeholder="Subtask Title" name="sub_title" required>
+
+		<label for="sub_des"><b>Description</b></label>
+		<input type="textarea" placeholder="Subtask description" name="sub_descriptoion" required>
+
+		<button id="subBtn" type="submit" class="btn">Save Subtask</button>
+		<button type="button" class="btn cancel" onclick="close_subtask_form()">Close</button>
+	  </form>
 	</div>
 	
 	<!--code end for schedule division-->
@@ -86,7 +104,28 @@ $(document).ready(function(){
  
 });
 
+$(document).ready(function(){
+
+  $("#loaded_css").click(function(){
+    $("#loaded_form_css").slideToggle("slow");
+  });
+ 
+});
+
+// script for subtask form
+
+
+function open_subtask_form() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function close_subtask_form() {
+  document.getElementById("myForm").style.display = "none";
+}
 </script>
+
+
+
 
 </body>
 
