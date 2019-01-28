@@ -11,10 +11,9 @@ const scheduleBtn = document.getElementById('scheduleBtn'),
 	saved_tasks = document.getElementById('fetched_data'),
 	sorted_tasks = document.getElementById('listing'),
 	filterBtn = document.getElementById('filter'),
-	//filter_select = document.querySelector('#priority_filter'),
 	sort_with_priority = document.getElementById('sort_priority');
 	searchbtn = document.getElementById('search_task');
-	//console.log(subtaskBtn);
+	//console.log(show_subbtn);
 const fetched_tasks = document.querySelector('#fetched_data');
 	
 	console.log(fetched_tasks);
@@ -64,7 +63,7 @@ function go_to_read(e){
 	const data = read_from_field();
 	data_ls.push(data);
 	localStorage.setItem('task', JSON.stringify(data_ls));
-	
+	window.alert("task added");
 	 while(fetched_tasks.firstChild) {
           fetched_tasks.removeChild(fetched_tasks.firstChild);
      }
@@ -148,7 +147,7 @@ function load_from_ls(){
 		<label class = "label" for="country"><b>Category:&nbsp</b></label><input type="text" value="${task_ls.category}">
 		<label class = "label" for=""><b>description:&nbsp</b></label><input type="text" value="${task_ls.description}">
 		<input id="addtaskBtn" class="sub" type="submit" value="Add Sub Tasks" onclick="add_subtask()">
-		<input id="showtaskBtn" class="sub" type="submit" value="Sub Tasks" onclick="show_subtask_div()"	>
+		<input id="showtaskBtn" class="sub" type="submit" value="Sub Tasks" >
 		<input id="edittask_Btn" class="sub" type="submit" value="Save_Edited_Task" >
 		<input id="deletetask_Btn" class="sub" type="submit" value="Delete" >
 		
@@ -175,13 +174,20 @@ function save_subtask(e){
 		const parentnode = (target).parentNode;
 		console.log(parentnode);
 		task_id = parentnode.id;
-
+		
 		
 	}
 	if(e.target.id === "showtaskBtn"){
 		console.log('yes');
 		//function
-		show_subtask();
+		const target = e.target;
+		const parentnode = (target).parentNode;
+		const child = (target).parentNode.childNodes;
+		
+		console.log(child);
+		const title = child[2].value;
+		console.log(title);
+		show_subtask(title);
 	}
 	if(e.target.id === "edittask_Btn"){
 		const target = e.target;
@@ -269,17 +275,17 @@ function get_from_subtaskform(){
 }
 
 // function for showing subtasks after fetching them from local storage
-function show_subtask(){
+function show_subtask(title){
 	const data_ls = getDataFromStorage();
 	let array = [];
 	data_ls.forEach(function(task){
-		if(task.id==task_id){
+		if(task.title==title){
 			
 			array = task.subtasks;
 		}
 	});
 	console.log(array);
-	show_task_div.style.display = "none";
+
 	array.forEach(function(subtask_data){
 		const division = document.createElement('div');
 		division.innerHTML = `
@@ -288,27 +294,32 @@ function show_subtask(){
 		<div class="modal-content">
 		<span class="close_sub">&times;</span>
 		
-		
 		<label for="sub_task"><b>Subtask Title</b></label>
 		<input type="text" placeholder="Subtask Title" name="sub_title" value="${subtask_data[0]}" required>
 
 		<label for="sub_des"><b>Description</b></label>
 		<textarea type="textarea" placeholder="Subtask description" name="sub_descriptoion" value="${subtask_data[1]}" required></textarea>
-
 		<button id="edit_subtask" type="submit" class="btn">Save Edited Subtask</button>
-		
 	  </div>
-
 	</div>
 		`;
 		show_task_div.appendChild(division);
 	});
 	console.log(show_task_div);
+	const show_subbtn = document.getElementById('showtaskBtn');
+		//show_subbtn.addEventListener('click', display_subtask_form);
+		console.log(show_subbtn);
+		show_subbtn.addEventListener("click", display_subtask_form);
 	
 }
 
-function show_subtask_div(){
-		show_task_div.style.display = "block";
+function display_subtask_form(){
+		if (show_task_div.style.display === "none") {
+	  console.log('ififififif');
+    show_task_div.style.display = "block";
+  } else {
+    show_task_div.style.display = "none";
+  }
 
 }
 
@@ -376,15 +387,14 @@ function sort_task_by_priority(){
 	data_ls.forEach(function(task_ls){
 		if(task_ls.priority == "High"){
 			const division = document.createElement('div');
-		division.style.display = "inline";
 		
 		division.innerHTML = `
-		<div class="loaded_sub" style="border-style:solild; border-color:red; border-width:3px;">
+		<div class="loaded_sub" style="border-style:solid; border-color:red; border-width:3px;">
 	  <form id="${count}" >
-		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+		<label class = "label" for="title"><b>Title:&nbsp${task_ls.title}</b></label>
 
-		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
-	   
+		<label class = "label" for="priority"><b>Priority:&nbsp${task_ls.priority}</b></label>
+		
 		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
 		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
 		
@@ -401,7 +411,7 @@ function sort_task_by_priority(){
 		division.style.display = "inline";
 		
 		division.innerHTML = `
-		<div class="loaded_sub" >
+		<div class="loaded_sub" style="border-style:solid; border-color:#054D90  ; border-width:3px;">
 	  <form id="${count}">
 		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
 
@@ -423,7 +433,7 @@ function sort_task_by_priority(){
 		division.style.display = "inline";
 		
 		division.innerHTML = `
-		<div class="loaded_sub" >
+		<div class="loaded_sub" style="border-style:solid; border-color:#908E05  ; border-width:3px;">
 	  <form id="${count}">
 		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
 
