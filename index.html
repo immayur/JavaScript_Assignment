@@ -9,12 +9,32 @@
 <div>
 	<div style="height=50px; width=100%;">
 	<div align ="center" style="height:50px; width: 50%;" class= "mainbar">
-		<a href="#" class= "active">Lists</a> 
-		<a href="#" >Today</a> 
+		<a id="task_list" href="#" class= "active">Task List</a> 
+		<a  href="#" >Today</a> 
 		<a id = "scheduleBtn" href="#" >Scheduled</a>
 	</div>
 	</div>
-	<div>	
+	<div id="list_task">	
+	
+	<!--listing and sorting-->
+
+		
+	<ul class="tasklistmenu">
+	  <li class="ul_li"><a class="active" href="#home">Sort with Priority</a></li>
+	  <li class="ul_li"><select id="category" name="Category" style="height:40px; padding: 5px; margin-top:5px;">
+			  <option value="Home">High</option>
+			  <option value="Office">Medium</option>
+			  <option value="Friend">Low</option>
+			</select><a href="#news" style="padding:5px;">Filter</a></li>
+	  <li class="ul_li"><input type="text" placeholder="search with title" style="height:25px; padding: 5px; margin-top:5px;"><a href="#contact" style="padding:5px;">Search</a></li>
+	  
+	</ul>
+
+	
+	<div id="listing" style="margin-left:25%;padding:1px 16px;height:1000px;">
+		
+	</div>
+	</div>
 	<!--division where fetched tasks are shown-->
 
 		
@@ -143,38 +163,7 @@ window.onclick = function(event) {
 }
 }
 
-function edit_form(){
-//subtask form
-var modal = document.getElementById('myModal');
 
-
-// Get the button that opens the modal
-//var btn = document.getElementByClassName("loaded_sub");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-
-// When the user clicks the button, open the modal 
-//btn.onclick = function() {
- // modal.style.display = "block";
-//}
-
-var btnContainer = document.getElementById("fetched_data");
-btnContainer.addEventListener("click", function() { modal.style.display = "block"; });
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-}
 
 
 </script>

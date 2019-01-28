@@ -5,9 +5,11 @@ const scheduleBtn = document.getElementById('scheduleBtn'),
 		formfield = document.querySelector('#main_form_div'),
 	saveBtn = document.getElementById('saveBtn'),
 	subtask_btn = document.getElementById('subBtn'),
-	edit_formBtn = document.getElementById('edittask_Btn');
+	task_listBtn = document.getElementById('task_list');
+	edit_formBtn = document.getElementById('edittask_Btn'),
 	show_task_div = document.getElementById('subtasks_div');
 	saved_tasks = document.getElementById('fetched_data');
+	sorted_tasks = document.getElementById('listing');
 	console.log(subtaskBtn);
 const fetched_tasks = document.querySelector('#fetched_data');
 	
@@ -18,6 +20,7 @@ loadEventListener();
 function loadEventListener(){
 	
 	scheduleBtn.addEventListener('click', go_to_scheduled);
+	task_listBtn.addEventListener('click', go_to_sort);
 	saveBtn.addEventListener('click', go_to_read);
 	//subtaskBtn.addEventListener('click',go_to_read_subtask);
 	//for fetching data from local storage
@@ -35,9 +38,15 @@ function go_to_scheduled(e){
 	const division = document.querySelector('#content');
 	console.log(division);
 	division.style.display = "block";
-
+	
 	console.log(formfield.childNodes);
-
+	const lists = document.querySelector('#list_task');
+	lists.style.display = "none";
+	const remove = document.querySelector('#listing');
+	 while(remove.firstChild) {
+          remove.removeChild(remove.firstChild);
+     }
+	
 	
 }
 
@@ -75,7 +84,9 @@ function read_from_field(taskdata){
 	data_array.push(taskdata[3][2].value);
 	data_array.push(taskdata[3][3].value);
 	console.log(data_array);*/
+	const date_task = new Date();
 	data_array = {
+		date: date_task,
 		id: count,
 		title: taskdata[3][0].value,
 		priority: taskdata[3][1].value,
@@ -127,6 +138,7 @@ function load_from_ls(){
 		<input id="addtaskBtn" class="sub" type="submit" value="Add Sub Tasks" onclick="add_subtask()">
 		<input id="showtaskBtn" class="sub" type="submit" value="Sub Tasks" onclick="show_subtask_div()"	>
 		<input id="edittask_Btn" class="sub" type="submit" value="Save_Edited_Task" >
+		<input id="deletetask_Btn" class="sub" type="submit" value="Delete" >
 		
 	  </form>
 	</div>	
@@ -186,6 +198,29 @@ function save_subtask(e){
 		});
 		console.log(data_ls);
 		localStorage.setItem('task', JSON.stringify(data_ls));
+	}
+	if(e.target.id === "deletetask_Btn"){
+		const target = e.target;
+		const parentnode = (target).parentNode;
+		const child = (target).parentNode.childNodes;
+		
+		console.log(child);
+		const title = child[2].value;
+		console.log(title);
+		//task_id = parentnode.id;
+		const data_ls = getDataFromStorage();
+		data_ls.forEach(function(data,index){
+			if(data.title==title){
+				data_ls.splice(index,1);
+			}
+		});	
+		console.log(data_ls);
+		//parentnode.innerHTML = "";
+		 while(parentnode.firstChild) {
+          parentnode.removeChild(parentnode.firstChild);
+		}
+		localStorage.setItem('task', JSON.stringify(data_ls));
+		//load_from_ls();
 	}
 	
 }
@@ -268,4 +303,50 @@ function show_subtask_div(){
 
 function edit_subtask_form(){
 	
+}
+
+
+
+//function for sort tast based on date and time
+
+function go_to_sort(){
+	const tasks = document.querySelector('#list_task');
+	tasks.style.display = 'block';
+	const data_ls = getDataFromStorage();
+	const first =  data_ls[0].date;
+	console.log(first);
+	for(var i=0;i<data_ls.length-1;i++){
+		for(var j=i+1;j<data_ls.length;j++){
+			if(data_ls[i].data>data_ls[j].data){
+				const temp = data_ls[i];
+				data_ls[i] = data_ls[j];
+				data_ls[j] = temp;
+			}
+		}
+	}
+	console.log(data_ls);
+	data_ls.forEach(function(task_ls){
+		
+		const division = document.createElement('div');
+		division.style.display = "inline";
+		division.innerHTML = `
+		<div class="loaded_sub">
+	  <form id="${count}">
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		
+	});
+	
+	const fetched = document.querySelector('#content');
+	fetched.style.display = 'none';
 }
