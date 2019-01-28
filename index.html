@@ -10,8 +10,7 @@
 	<div style="height=50px; width=100%;">
 	<div align ="center" style="height:50px; width: 50%;" class= "mainbar">
 		<a id="task_list" href="#" class= "active">Task List</a> 
-		<a  href="#" >Today</a> 
-		<a id = "scheduleBtn" href="#" >Scheduled</a>
+		<a id = "scheduleBtn" href="#" >Add Task</a>
 	</div>
 	</div>
 	<div id="list_task">	
@@ -20,13 +19,13 @@
 
 		
 	<ul class="tasklistmenu">
-	  <li class="ul_li"><a class="active" href="#home">Sort with Priority</a></li>
-	  <li class="ul_li"><select id="category" name="Category" style="height:40px; padding: 5px; margin-top:5px;">
-			  <option value="Home">High</option>
-			  <option value="Office">Medium</option>
-			  <option value="Friend">Low</option>
-			</select><a href="#news" style="padding:5px;">Filter</a></li>
-	  <li class="ul_li"><input type="text" placeholder="search with title" style="height:25px; padding: 5px; margin-top:5px;"><a href="#contact" style="padding:5px;">Search</a></li>
+	  <li class="ul_li"><a id = "sort_priority" class="active" href="#home">Sort with Priority</a></li>
+	  <li class="ul_li"><select id="priority_filter" name="Category" style="height:40px; padding: 5px; margin-top:5px;">
+			  <option value="High">High</option>
+			  <option value="Medium">Medium</option>
+			  <option value="Low">Low</option>
+			</select><a id="filter" href="#news" style="padding:5px;">Filter</a></li>
+	  <li class="ul_li"><input id="get_title" type="text" placeholder="search with title" style="height:25px; padding: 5px; margin-top:5px;"><a id="search_task" href="#contact" style="padding:5px;">Search</a></li>
 	  
 	</ul>
 
@@ -59,9 +58,9 @@
       <div >Priority</div>
       <div class="col-75">
         <select id="priority" name="Priority">
-          <option value="high">HIGH</option>
-          <option value="medium">MEDIUM</option>
-          <option value="LOW">LOW</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
         </select>
       </div>
     </div>
@@ -82,7 +81,6 @@
     </div>
     <div class="row">
       <input id = "saveBtn" type="submit" value="Save">
-	  <input id = "subtaskBtn" type = "submit" value="Subtasks" onclick="open_subtask_form()">
     </div>
 	</form>	 
 	</div>	 

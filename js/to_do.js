@@ -5,12 +5,16 @@ const scheduleBtn = document.getElementById('scheduleBtn'),
 		formfield = document.querySelector('#main_form_div'),
 	saveBtn = document.getElementById('saveBtn'),
 	subtask_btn = document.getElementById('subBtn'),
-	task_listBtn = document.getElementById('task_list');
+	task_listBtn = document.getElementById('task_list'),
 	edit_formBtn = document.getElementById('edittask_Btn'),
-	show_task_div = document.getElementById('subtasks_div');
-	saved_tasks = document.getElementById('fetched_data');
-	sorted_tasks = document.getElementById('listing');
-	console.log(subtaskBtn);
+	show_task_div = document.getElementById('subtasks_div'),
+	saved_tasks = document.getElementById('fetched_data'),
+	sorted_tasks = document.getElementById('listing'),
+	filterBtn = document.getElementById('filter'),
+	//filter_select = document.querySelector('#priority_filter'),
+	sort_with_priority = document.getElementById('sort_priority');
+	searchbtn = document.getElementById('search_task');
+	//console.log(subtaskBtn);
 const fetched_tasks = document.querySelector('#fetched_data');
 	
 	console.log(fetched_tasks);
@@ -29,6 +33,9 @@ function loadEventListener(){
 	//add subtask
 	fetched_tasks.addEventListener('click', save_subtask);
 	subtask_btn.addEventListener('click', go_to_subtaskform);
+	sort_with_priority.addEventListener('click', sort_task_by_priority);
+	filterBtn.addEventListener('click', filter_by_priority);
+	searchbtn.addEventListener('click', search_by_title);
 	//edit_formBtn.addEventListener('click', edit_subtask_form);
 }
 
@@ -57,6 +64,11 @@ function go_to_read(e){
 	const data = read_from_field();
 	data_ls.push(data);
 	localStorage.setItem('task', JSON.stringify(data_ls));
+	
+	 while(fetched_tasks.firstChild) {
+          fetched_tasks.removeChild(fetched_tasks.firstChild);
+     }
+	load_from_ls();
 	
 }
 
@@ -159,13 +171,11 @@ function save_subtask(e){
 	console.log(e.target);
 	if(e.target.classList.contains('sub')){
 		const target = e.target;
-		//const subtask_btn = document.getElementById('subBtn');
-		//subtask_btn.addEventListener('click', go_to_subtaskform(this), false)
+	
 		const parentnode = (target).parentNode;
 		console.log(parentnode);
 		task_id = parentnode.id;
-		//const child_list = parentnode.childNodes[1].childNodes[1].childNodes[1].childNodes[1].id;
-		//console.log(child_list);
+
 		
 	}
 	if(e.target.id === "showtaskBtn"){
@@ -264,6 +274,7 @@ function show_subtask(){
 	let array = [];
 	data_ls.forEach(function(task){
 		if(task.id==task_id){
+			
 			array = task.subtasks;
 		}
 	});
@@ -310,6 +321,10 @@ function edit_subtask_form(){
 //function for sort tast based on date and time
 
 function go_to_sort(){
+	const remove = document.querySelector('#listing');
+	 while(remove.firstChild) {
+          remove.removeChild(remove.firstChild);
+     }
 	const tasks = document.querySelector('#list_task');
 	tasks.style.display = 'block';
 	const data_ls = getDataFromStorage();
@@ -349,4 +364,145 @@ function go_to_sort(){
 	
 	const fetched = document.querySelector('#content');
 	fetched.style.display = 'none';
+}
+
+// function priority sort
+function sort_task_by_priority(){
+	const remove = document.querySelector('#listing');
+	 while(remove.firstChild) {
+          remove.removeChild(remove.firstChild);
+     }
+	const data_ls = getDataFromStorage();
+	data_ls.forEach(function(task_ls){
+		if(task_ls.priority == "High"){
+			const division = document.createElement('div');
+		division.style.display = "inline";
+		
+		division.innerHTML = `
+		<div class="loaded_sub" style="border-style:solild; border-color:red; border-width:3px;">
+	  <form id="${count}" >
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		}
+	});
+	data_ls.forEach(function(task_ls){
+		if(task_ls.priority == "Medium"){
+			const division = document.createElement('div');
+		division.style.display = "inline";
+		
+		division.innerHTML = `
+		<div class="loaded_sub" >
+	  <form id="${count}">
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		}
+	});
+	data_ls.forEach(function(task_ls){
+		if(task_ls.priority == "Low"){
+			const division = document.createElement('div');
+		division.style.display = "inline";
+		
+		division.innerHTML = `
+		<div class="loaded_sub" >
+	  <form id="${count}">
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		}
+	});
+}
+
+function filter_by_priority(){
+	const remove = document.querySelector('#listing');
+	 while(remove.firstChild) {
+          remove.removeChild(remove.firstChild);
+     }
+	 //const type  = filter_select.value;
+	 const sibling = filterBtn.previousSibling.value;
+	const data_ls = getDataFromStorage();
+	data_ls.forEach(function(task_ls){
+		if(task_ls.priority == sibling){
+			const division = document.createElement('div');
+		division.style.display = "inline";
+		
+		division.innerHTML = `
+		<div class="loaded_sub" >
+	  <form id="${count}">
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		}
+	});
+}
+
+// function to search by title
+
+function search_by_title(){
+	const remove = document.querySelector('#listing');
+	 while(remove.firstChild) {
+          remove.removeChild(remove.firstChild);
+     }
+	 const title_value = searchbtn.previousSibling.value;
+	 const data_ls = getDataFromStorage();
+	 data_ls.forEach(function(task_ls){
+		if(task_ls.title == title_value){
+			const division = document.createElement('div');
+		division.style.display = "inline";
+		
+		division.innerHTML = `
+		<div class="loaded_sub" >
+	  <form id="${count}">
+		<label class = "label" for="fname"><b>Title:&nbsp${task_ls.title}</b></label>
+
+		<label class = "label" for="lname"><b>Priority:&nbsp${task_ls.priority}</b></label>
+	   
+		<label class = "label" for="country"><b>Category:&nbsp${task_ls.category}</b></label>
+		<label class = "label" for=""><b>description:&nbsp${task_ls.description}</b></label>
+		
+	  </form>
+	</div>	
+		`;
+		sorted_tasks.appendChild(division);
+		
+		}
+	});
+
 }
