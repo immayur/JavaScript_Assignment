@@ -188,6 +188,7 @@ function save_subtask(e){
 		const title = child[2].value;
 		console.log(title);
 		show_subtask(title);
+		
 	}
 	if(e.target.id === "edittask_Btn"){
 		const target = e.target;
@@ -213,6 +214,7 @@ function save_subtask(e){
 			}
 		});
 		console.log(data_ls);
+		window.alert("task Edited");
 		localStorage.setItem('task', JSON.stringify(data_ls));
 	}
 	if(e.target.id === "deletetask_Btn"){
@@ -232,6 +234,7 @@ function save_subtask(e){
 		});	
 		console.log(data_ls);
 		//parentnode.innerHTML = "";
+		window.alert("task Deleted");
 		 while(parentnode.firstChild) {
           parentnode.removeChild(parentnode.firstChild);
 		}
